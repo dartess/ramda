@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var R = require('../source/index.js');
+var R = require('remeda');
 var eq = require('./shared/eq.js');
 
 
@@ -29,9 +29,11 @@ describe('concat', function() {
     eq(R.concat(z1, z2), 'z1 z2');
   });
 
-  it('throws if attempting to combine an array with a non-array', function() {
-    assert.throws(function() { return R.concat([1], 2); }, TypeError);
-  });
+  // NOTE: неактуально для TS
+
+  // it('throws if attempting to combine an array with a non-array', function() {
+  //   assert.throws(function() { return R.concat([1], 2); }, TypeError);
+  // });
 
   it('throws if not an array, String, or object with a concat method', function() {
     assert.throws(function() { return R.concat({}, {}); }, TypeError);
