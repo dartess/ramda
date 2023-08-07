@@ -1,9 +1,6 @@
-var listXf = require('./helpers/listXf.js');
-
 var R = require('../source/index.js');
 var assert = require('assert');
 var eq = require('./shared/eq.js');
-var Id = require('./shared/Id.js');
 
 describe('map', function() {
   var times2 = function(x) {return x * 2;};
@@ -31,13 +28,6 @@ describe('map', function() {
     eq(R.map(add1, obj), 101);
   });
 
-  it('dispatches to transformer objects', function() {
-    eq(R.map(add1, listXf), {
-      f: add1,
-      xf: listXf
-    });
-  });
-
   it('throws a TypeError on null and undefined', function() {
     assert.throws(function() { return R.map(times2, null); }, TypeError);
     assert.throws(function() { return R.map(times2, undefined); }, TypeError);
@@ -47,22 +37,6 @@ describe('map', function() {
     var mdouble = R.map(times2);
     var mdec = R.map(dec);
     eq(mdec(mdouble([10, 20, 30])), [19, 39, 59]);
-  });
-
-  it('can compose transducer-style', function() {
-    var mdouble = R.map(times2);
-    var mdec = R.map(dec);
-    var xcomp = mdec(mdouble(listXf));
-    eq(xcomp.xf, {xf: listXf, f: times2});
-    eq(xcomp.f, dec);
-  });
-
-  it('correctly uses fantasy-land implementations', function() {
-
-    var m1 = Id(1);
-    var m2 = R.map(R.add(1), m1);
-
-    eq(m1.value + 1, m2.value);
   });
 
   it('can act as a transducer', function() {

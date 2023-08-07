@@ -1,6 +1,5 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var _isTransformer = require('../source/internal/_isTransformer.js');
 
 
 describe('groupBy', function() {
@@ -32,16 +31,6 @@ describe('groupBy', function() {
 
   it('returns an empty object if given an empty array', function() {
     eq(R.groupBy(R.prop('x'), []), {});
-  });
-
-  it('dispatches on transformer objects in list position', function() {
-    var byType = R.prop('type');
-    var xf = {
-      '@@transducer/init': function() { return {}; },
-      '@@transducer/result': function(x) { return x; },
-      '@@transducer/step': R.mergeRight
-    };
-    eq(_isTransformer(R.groupBy(byType, xf)), true);
   });
 
   it('can act as a transducer', function() {

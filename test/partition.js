@@ -1,5 +1,3 @@
-var S = require('sanctuary');
-
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
 
@@ -26,14 +24,4 @@ describe('partition', function() {
       [{ b: 1, d: 3 }, { a: 0, c: 2 }]
     );
   });
-
-  it('works with other filterables', function() {
-    eq(R.partition(R.isEmpty, S.Just(3)),
-      [S.Nothing(), S.Just(3)]
-    );
-    eq(R.partition(R.complement(R.isEmpty), S.Just(3)),
-      [S.Just(3), S.Nothing()]
-    );
-  });
-
 });

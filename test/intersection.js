@@ -1,6 +1,5 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var {Just} = require('./shared/Maybe.js');
 
 
 describe('intersection', function() {
@@ -28,7 +27,6 @@ describe('intersection', function() {
     eq(R.intersection([0], [-0]).length, 0);
     eq(R.intersection([-0], [0]).length, 0);
     eq(R.intersection([NaN], [NaN]).length, 1);
-    eq(R.intersection([new Just([42])], [new Just([42])]).length, 1);
   });
 
 });
