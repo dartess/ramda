@@ -20,6 +20,8 @@ describe('clamp', function() {
     eq(R.clamp(0, { min: -15, max: 3 }), 0);
   });
 
+  // NOTE: remeda не работает с не-числами
+
   // it('works with letters as well', function() {
   //   eq(R.clamp('d', 'n', 'f'), 'f');
   //   eq(R.clamp('d', 'n', 'a'), 'd');
