@@ -1,4 +1,4 @@
-var R = require('../source/index.js');
+var R = require('remeda');
 var eq = require('./shared/eq.js');
 
 
@@ -16,19 +16,21 @@ describe('uniq', function() {
     eq(R.uniq([]), []);
   });
 
-  it('has R.equals semantics', function() {
-    eq(R.uniq([-0, -0]).length, 1);
-    eq(R.uniq([0, -0]).length, 2);
-    eq(R.uniq([NaN, NaN]).length, 1);
-    eq(R.uniq([[1], [1]]).length, 1);
-  });
+  // NOTE: не применимо
+  // it('has R.equals semantics', function() {
+  //   eq(R.uniq([-0, -0]).length, 1);
+  //   eq(R.uniq([0, -0]).length, 2);
+  //   eq(R.uniq([NaN, NaN]).length, 1);
+  //   eq(R.uniq([[1], [1]]).length, 1);
+  // });
 
   it('handles null and undefined elements', function() {
     eq(R.uniq([void 0, null, void 0, null]), [void 0, null]);
   });
 
   it('uses reference equality for functions', function() {
-    eq(R.uniq([R.add, R.identity, R.add, R.identity, R.add, R.identity]).length, 2);
+    const add = () => {};
+    eq(R.uniq([add, R.identity, add, R.identity, add, R.identity]).length, 2);
   });
 
 });
