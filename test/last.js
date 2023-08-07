@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var R = require('../source/index.js');
+var R = require('remeda');
 var eq = require('./shared/eq.js');
 
 
@@ -12,10 +12,11 @@ describe('last', function() {
     eq(R.last([1]), 1);
     eq(R.last([]), undefined);
 
-    eq(R.last('abc'), 'c');
-    eq(R.last('ab'), 'b');
-    eq(R.last('a'), 'a');
-    eq(R.last(''), '');
+    // NOTE не применимо
+    // eq(R.last('abc'), 'c');
+    // eq(R.last('ab'), 'b');
+    // eq(R.last('a'), 'a');
+    // eq(R.last(''), '');
   });
 
   it('throws if applied to null or undefined', function() {
