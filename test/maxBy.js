@@ -1,12 +1,13 @@
-var R = require('../source/index.js');
+var R = require('remeda');
 var eq = require('./shared/eq.js');
 
 
 describe('maxBy', function() {
 
   it('returns the larger value as determined by the function', function() {
-    eq(R.maxBy(function(n) { return n * n; }, -3, 2), -3);
-    eq(R.maxBy(R.prop('x'), {x: 3, y: 1}, {x: 5, y: 10}), {x: 5, y: 10});
+    // NOTE не применимо
+    eq(R.maxBy([-3, 2], function(n) { return n * n; }), -3);
+    eq(R.maxBy([{x: 3, y: 1}, {x: 5, y: 10}], R.prop('x')), {x: 5, y: 10});
   });
 
 });
