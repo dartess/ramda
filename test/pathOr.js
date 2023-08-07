@@ -1,4 +1,4 @@
-var R = require('../source/index.js');
+var R = require('remeda');
 var eq = require('./shared/eq.js');
 
 
@@ -21,31 +21,31 @@ describe('pathOr', function() {
       i: 'I',
       j: ['J']
     };
-    eq(R.pathOr('Unknown', ['a', 'b', 'c'], obj), 100);
-    eq(R.pathOr('Unknown', [], obj), obj);
-    eq(R.pathOr('Unknown', ['a', 'e', 'f', 1], obj), 101);
-    eq(R.pathOr('Unknown', ['j', 0], obj), 'J');
-    eq(R.pathOr('Unknown', ['j', 1], obj), 'Unknown');
-    eq(R.pathOr('Unknown', ['a', 'b', 'c'], null), 'Unknown');
+    eq(R.pathOr(obj, ['a', 'b', 'c'], 'Unknown'), 100);
+    eq(R.pathOr(obj, [], 'Unknown'), obj);
+    eq(R.pathOr(obj, ['a', 'e', 'f', 1], 'Unknown'), 101);
+    eq(R.pathOr(obj, ['j', 0], 'Unknown'), 'J');
+    eq(R.pathOr(obj, ['j', 1], 'Unknown'), 'Unknown');
+    eq(R.pathOr(null, ['a', 'b', 'c'], 'Unknown'), 'Unknown');
   });
 
   it("gets a deep property's value from objects", function() {
-    eq(R.pathOr('Unknown', ['a', 'b', 'c'], deepObject), 'c');
-    eq(R.pathOr('Unknown', ['a'], deepObject), deepObject.a);
+    eq(R.pathOr(deepObject, ['a', 'b', 'c'], 'Unknown'), 'c');
+    eq(R.pathOr(deepObject, ['a'], 'Unknown'), deepObject.a);
   });
 
   it('returns the default value for items not found', function() {
-    eq(R.pathOr('Unknown', ['a', 'b', 'foo'], deepObject), 'Unknown');
-    eq(R.pathOr('Unknown', ['bar'], deepObject), 'Unknown');
+    eq(R.pathOr(deepObject, ['a', 'b', 'foo'], 'Unknown'), 'Unknown');
+    eq(R.pathOr(deepObject, ['bar'], 'Unknown'), 'Unknown');
   });
 
   it('returns the default value for null/undefined', function() {
-    eq(R.pathOr('Unknown', ['toString'], null), 'Unknown');
-    eq(R.pathOr('Unknown', ['toString'], undefined), 'Unknown');
+    eq(R.pathOr(null, ['toString'], 'Unknown'), 'Unknown');
+    eq(R.pathOr(undefined, ['toString'], 'Unknown'), 'Unknown');
   });
 
   it('works with falsy items', function() {
-    eq(R.pathOr('Unknown', ['toString'], false), Boolean.prototype.toString);
+    eq(R.pathOr(false, ['toString'], 'Unknown'), Boolean.prototype.toString);
   });
 
 });
