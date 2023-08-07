@@ -1,4 +1,4 @@
-var R = require('../source/index.js');
+var R = require('remeda');
 var eq = require('./shared/eq.js');
 
 
