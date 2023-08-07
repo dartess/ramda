@@ -1,6 +1,4 @@
-var assert = require('assert');
-
-var R = require('../source/index.js');
+var R = require('remeda');
 var eq = require('./shared/eq.js');
 
 
@@ -23,14 +21,15 @@ describe('range', function() {
     eq(R.range(10, 5), []);
   });
 
-  it('terminates given bad input', function() {
-    assert.throws(
-      function() { R.range('a', 'z'); },
-      function(err) {
-        return err.constructor === TypeError &&
-               err.message === 'Both arguments to range must be numbers';
-      }
-    );
-  });
+  // NOTE не применимо с TS
+  // it('terminates given bad input', function() {
+  //   assert.throws(
+  //     function() { R.range('a', 'z'); },
+  //     function(err) {
+  //       return err.constructor === TypeError &&
+  //              err.message === 'Both arguments to range must be numbers';
+  //     }
+  //   );
+  // });
 
 });
