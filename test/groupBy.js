@@ -1,4 +1,4 @@
-var R = require('../source/index.js');
+var R = require('remeda');
 var eq = require('./shared/eq.js');
 
 
@@ -20,7 +20,7 @@ describe('groupBy', function() {
       {name: 'Jack', score: 69}
     ];
     var byGrade = function(student) {return grade(student.score || 0);};
-    eq(R.groupBy(byGrade, students), {
+    eq(R.groupBy(students, byGrade), {
       A: [{name: 'Dianne', score: 99}, {name: 'Gillian', score: 91}],
       B: [{name: 'Abby', score: 84}, {name: 'Chris', score: 89}, {name: 'Irene', score: 85}],
       C: [{name: 'Brad', score: 73}, {name: 'Hannah', score: 78}],
@@ -30,14 +30,15 @@ describe('groupBy', function() {
   });
 
   it('returns an empty object if given an empty array', function() {
-    eq(R.groupBy(R.prop('x'), []), {});
+    eq(R.groupBy([], R.prop('x')), {});
   });
 
-  it('can act as a transducer', function() {
-    var evenOdd = x => x % 2  === 0 ? 'even' : 'odd';
-    var expected = {even: [2, 4, 6, 8], odd: [1, 3, 5, 7, 9]};
-    eq(R.into({}, R.groupBy(evenOdd), R.range(1, 10)), expected);
-    eq(R.transduce(R.groupBy(evenOdd), (result, input) => {result[input[0]] = input[1]; return result;}, {}, R.range(1, 10)), expected);
-  });
+  // NOTE: не применимо
+  // it('can act as a transducer', function() {
+  //   var evenOdd = x => x % 2  === 0 ? 'even' : 'odd';
+  //   var expected = {even: [2, 4, 6, 8], odd: [1, 3, 5, 7, 9]};
+  //   eq(R.into({}, R.groupBy(evenOdd), R.range(1, 10)), expected);
+  //   eq(R.transduce(R.groupBy(evenOdd), (result, input) => {result[input[0]] = input[1]; return result;}, {}, R.range(1, 10)), expected);
+  // });
 
 });
